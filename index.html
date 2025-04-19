@@ -1,28 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💰 Crypto Tracker</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meet | Teen Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- AOS Animation Library -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  
+  <!-- Particles.js Library -->
+  <script src="https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(270deg, #e9f7e1, #b0c4a5, #7c9473);
+      background-size: 600% 600%;
+      animation: gradientFlow 20s ease infinite;
+      color: #203520;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      position: relative;
+      transition: background 0.5s, color 0.5s;
+    }
+    .dark-mode {
+      background: #0f1a0f;
+      color: #d7f8cf;
+    }
+    .dark-mode .projects li,
+    .dark-mode .skills-list li,
+    .dark-mode .achievements li {
+      background: #1e2e1e;
+      border-left-color: #456945;
+    }
+    .dark-mode header a {
+      background: #2a462a;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #2c422c;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    .typed-text {
+      font-size: 1.2rem;
+      color: #456945;
+      margin-top: 0.5rem;
+    }
+    header a {
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      background: #345c34;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    header a:hover {
+      background: #4e7c4e;
+    }
+
+    .toggle-mode {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem;
+      background: #345c34;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      animation: floatIn 1s ease;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #2c422c;
+    }
+
+    .skills-list, .projects, .achievements {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .projects li,
+    .skills-list li,
+    .achievements li {
+      margin-bottom: 1rem;
+      background: #e0f1d8;
+      padding: 1rem;
+      border-left: 6px solid #7c9473;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+
+    .projects li:hover {
+      transform: translateY(-5px);
+      transform: rotateY(15deg) rotateX(15deg);
+    }
+
+    .project-links a {
+      margin-right: 10px;
+      text-decoration: underline;
+      color: #456945;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 1rem;
+      justify-items: center;
+    }
+
+    .tech-grid img {
+      width: 40px;
+      height: 40px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #5d7a5d;
+    }
+
+    /* Neon Glowing Effect */
+    .glow-on-hover {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      color: #fff;
+      font-size: 20px;
+      text-transform: uppercase;
+      background: #000;
+      padding: 20px;
+      border-radius: 30px;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .glow-on-hover:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, #ff00ff, #00ffff, #ff0000);
+      z-index: -1;
+      filter: blur(5px);
+      transform: scale(0);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .glow-on-hover:hover {
+      color: #ff00ff;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    .glow-on-hover:hover:before {
+      transform: scale(1);
+    }
+  </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1 class="title">💰 Live Crypto Price Tracker</h1>
+  <div id="particles-js"></div>
 
-    <div class="card">
-      <p id="btc">BTC: Fetching...</p>
-      <p id="eth">ETH: Fetching...</p>
+  <!-- Dark Mode Toggle -->
+  <button class="toggle-mode" onclick="document.body.classList.toggle('dark-mode')">Toggle Dark Mode</button>
+
+  <header>
+    <h1>Meet soni</h1>
+    <p class="typed-text">Hi!, I am a Teen Developer</p>
+    <a href="#projects" class="glow-on-hover">View Projects</a>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m a 15-year-old 10th grader passionate about coding, web development, and tech innovation. I build websites, do competitive programming, and even experimented with crypto mining. My dream is to become a top full-stack developer and a CP master.</p>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul class="skills-list">
+      <li><strong>Languages:</strong> C++, Python, HTML, CSS, JavaScript</li>
+      <li><strong>Explored:</strong> Batch scripting, Kotlin GUI, Assembly Language</li>
+      <li><strong>Tools & Tech:</strong> Arch Linux, Blender, speech_recognition, pyttsx3, Git</li>
+      <li><strong>Typing Speed:</strong> 130 WPM</li>
+    </ul>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section id="tech">
+    <h2>Tech Stack</h2>
+    <div class="tech-grid">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
     </div>
+  </section>
 
-    <button class="refresh-btn" onclick="fetchCryptoPrices()">🔄 Refresh Now</button>
+  <!-- Competitive Programming Section -->
+  <section id="cp">
+    <h2>Competitive Programming</h2>
+    <p>I actively practice CP on Codeforces and solve problems using C++ and Python.</p>
+    <p><strong>Codeforces Rating:</strong> 783</p>
+  </section>
 
-    <div class="chart-container">
-      <canvas id="cryptoChart"></canvas>
-    </div>
-  </div>
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul class="projects">
+      <li><strong>Virtual Assistant:</strong> Voice-controlled assistant using Python for weather, time, and web search.</li>
+      <li><strong>Flashcard App:</strong> A web app for students to practice with flashcards.</li>
+      <li><strong>Flocet edu help:</strong> A web app for students to practice with flashcards make notes , and also a to-do list.</li>
+      <li><strong>E-commerce Website:</strong> Designed and built an e-commerce site for a clothing store, allowing users to view, download images, and contact the owner for orders.</li>
+    </ul>
+  </section>
 
-  <script src="script.js"></script>
+  <!-- Footer -->
+  <footer>
+    <p>Contact me at: <a href="mailto:meet10112009@gmail.com">meet10112009@gmail.com</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 80,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: "#456945"
+        },
+        shape: {
+          type: "circle",
+          stroke: {
+            width: 0,
+            color: "#fff"
+          }
+        },
+        opacity: {
+          value: 0.5,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: false
+          }
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          out_mode: "out",
+          bounce: false,
+          attract: {
+            enable: false
+          }
+        }
+      }
+    });
+  </script>
 </body>
+
 </html>
